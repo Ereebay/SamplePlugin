@@ -1,0 +1,12 @@
+# Normalize line endings on commit; check out CRLF on Windows (matches .editorconfig).
+* text=auto
+
+# C# / project files are always CRLF to match the AssettoServer convention.
+*.cs    text eol=crlf
+*.csproj text eol=crlf
+*.sln   text eol=crlf
+
+# Shell scripts must stay LF or they break on Linux.
+*.sh    text eol=lf
+*.yml   text eol=lf
+*.yaml  text eol=lf

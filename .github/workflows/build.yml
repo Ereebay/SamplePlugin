@@ -1,0 +1,40 @@
+name: Build
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      # The plugin references the host via ..\AssettoServer\... — so it must be
+      # built from inside an AssettoServer checkout. Check the host out first,
+      # then drop this repo inside it.
+      - name: Checkout AssettoServer (host)
+        uses: actions/checkout@v4
+        with:
+          repository: compujuckel/AssettoServer
+          ref: v0.0.54          # this template targets AssettoServer 0.0.54 (net8.0)
+          path: AssettoServer
+          fetch-depth: 0        # Nerdbank.GitVersioning needs full history
+
+      - name: Checkout plugin
+        uses: actions/checkout@v4
+        with:
+          path: AssettoServer/sample-plugin
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.x
+
+      - name: Build
+        run: dotnet build AssettoServer/sample-plugin/SamplePlugin.csproj -c Release
+
+      - name: Upload plugin artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: SamplePlugin
+          path: AssettoServer/sample-plugin/bin/Release/net8.0/SamplePlugin.dll

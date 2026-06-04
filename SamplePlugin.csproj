@@ -1,0 +1,46 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <EnableDynamicLoading>true</EnableDynamicLoading>
+        <SelfContained>false</SelfContained>
+        <DebugType>embedded</DebugType>
+        <Version>1.0.0</Version>
+        <Description>Sample AssettoServer plugin — template showing custom HTTP routes, chat commands, YAML config and an autostart service.</Description>
+        <PublishDir Condition="'$(RuntimeIdentifier)' == 'linux-x64'">..\out-linux-x64\plugins\$(MSBuildProjectName)\</PublishDir>
+        <PublishDir Condition="'$(RuntimeIdentifier)' == 'linux-arm64'">..\out-linux-arm64\plugins\$(MSBuildProjectName)\</PublishDir>
+        <PublishDir Condition="'$(RuntimeIdentifier)' == 'win-x64'">..\out-win-x64\plugins\$(MSBuildProjectName)\</PublishDir>
+        <PathMap>$(MSBuildProjectDirectory)=$(MSBuildProjectName)</PathMap>
+    </PropertyGroup>
+
+    <!--
+      AssettoServer host references.
+
+      This repo is meant to be cloned INTO the root of an AssettoServer checkout,
+      next to the AssettoServer/ and AssettoServer.Shared/ folders, so that the
+      ..\ paths below resolve, e.g.:
+
+          AssettoServer/                       <- git clone compujuckel/AssettoServer
+          ├── AssettoServer/                   <- main server project
+          ├── AssettoServer.Shared/            <- plugin-facing API surface
+          └── assettoserver-sample-plugin/     <- this repo
+              └── SamplePlugin.csproj
+
+      <Private>false</Private> + <ExcludeAssets>runtime</ExcludeAssets> keep these
+      references compile-time only — the host DLLs are NOT bundled with the plugin
+      (the running server provides them).
+    -->
+    <ItemGroup>
+        <ProjectReference Include="..\AssettoServer.Shared\AssettoServer.Shared.csproj">
+            <Private>false</Private>
+            <ExcludeAssets>runtime</ExcludeAssets>
+        </ProjectReference>
+        <ProjectReference Include="..\AssettoServer\AssettoServer.csproj">
+            <Private>false</Private>
+            <ExcludeAssets>runtime</ExcludeAssets>
+        </ProjectReference>
+    </ItemGroup>
+
+</Project>

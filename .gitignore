@@ -1,0 +1,21 @@
+# Build output
+bin/
+obj/
+out-*/
+
+# Rider / JetBrains
+.idea/
+_ReSharper*/
+*.DotSettings.user
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userprefs
+
+# VS Code
+.vscode/
+
+# Misc
+*.log
