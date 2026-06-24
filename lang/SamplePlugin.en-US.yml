@@ -1,0 +1,9 @@
+locale: en-US
+strings:
+  # Chat command reply (see SampleCommandModule)
+  plugin.sample.cmd.hello: "Hello from sample plugin!"
+
+  # In-game CSP UI strings (see lua/sample.lua). {track} is a runtime placeholder.
+  plugin.sample.ui.title: "Sample Plugin"
+  plugin.sample.ui.greeting: "Welcome to {track}!"
+  plugin.sample.ui.body: "This window is localized server-side via tr()."

@@ -1,0 +1,10 @@
+locale: zh-CN
+fallback: en-US
+strings:
+  # 聊天命令回复（见 SampleCommandModule）
+  plugin.sample.cmd.hello: "来自示例插件的问候！"
+
+  # CSP 游戏内 UI 文本（见 lua/sample.lua）。{track} 是运行时占位符。
+  plugin.sample.ui.title: "示例插件"
+  plugin.sample.ui.greeting: "欢迎来到 {track}！"
+  plugin.sample.ui.body: "此窗口由服务器端 tr() 本地化。"

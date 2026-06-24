@@ -47,4 +47,19 @@
         </ProjectReference>
     </ItemGroup>
 
+    <!-- Localization: copy the lang catalogs and the CSP Lua script to the plugin output so
+         ILocalizationService / AddLocalizedScript can find them at runtime. -->
+    <ItemGroup>
+        <None Update="lua\sample.lua">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Include="lang\*.yml">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+        </Content>
+    </ItemGroup>
+
 </Project>

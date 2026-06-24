@@ -15,8 +15,8 @@ jobs:
       - name: Checkout AssettoServer (host)
         uses: actions/checkout@v4
         with:
-          repository: compujuckel/AssettoServer
-          ref: v0.0.55-pre35    # this template targets AssettoServer 0.0.55 (net9.0)
+          repository: Ereebay/AssettoServer
+          ref: 0.0.55-main    # custom variant: build against the Ereebay fork (adds the localization API)
           path: AssettoServer
           fetch-depth: 0        # MinVer derives the version from git tags — needs full history
 
@@ -37,4 +37,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: SamplePlugin
-          path: AssettoServer/sample-plugin/bin/Release/net9.0/SamplePlugin.dll
+          path: |
+            AssettoServer/sample-plugin/bin/Release/net9.0/SamplePlugin.dll
+            AssettoServer/sample-plugin/bin/Release/net9.0/lang/
+            AssettoServer/sample-plugin/bin/Release/net9.0/lua/
