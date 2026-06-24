@@ -1,18 +1,22 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
+        <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <EnableDynamicLoading>true</EnableDynamicLoading>
         <SelfContained>false</SelfContained>
         <DebugType>embedded</DebugType>
         <Version>1.0.0</Version>
-        <Description>Sample AssettoServer plugin — template showing custom HTTP routes, chat commands, YAML config and an autostart service.</Description>
-        <PublishDir Condition="'$(RuntimeIdentifier)' == 'linux-x64'">..\out-linux-x64\plugins\$(MSBuildProjectName)\</PublishDir>
-        <PublishDir Condition="'$(RuntimeIdentifier)' == 'linux-arm64'">..\out-linux-arm64\plugins\$(MSBuildProjectName)\</PublishDir>
-        <PublishDir Condition="'$(RuntimeIdentifier)' == 'win-x64'">..\out-win-x64\plugins\$(MSBuildProjectName)\</PublishDir>
+        <Description>Sample AssettoServer plugin — template showing custom HTTP routes, chat commands, YAML config and a background service.</Description>
+        <PublishDir>..\out-$(RuntimeIdentifier)\plugins\$(MSBuildProjectName)\</PublishDir>
         <PathMap>$(MSBuildProjectDirectory)=$(MSBuildProjectName)</PathMap>
+    </PropertyGroup>
+
+    <!-- In Debug, drop the built plugin straight into the host's bin so it loads when you run the server from your IDE. -->
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+        <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+        <OutputPath>..\AssettoServer\bin\$(Configuration)\$(TargetFramework)\plugins\$(MSBuildProjectName)</OutputPath>
     </PropertyGroup>
 
     <!--
