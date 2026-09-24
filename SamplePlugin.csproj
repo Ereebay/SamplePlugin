@@ -7,7 +7,7 @@
         <EnableDynamicLoading>true</EnableDynamicLoading>
         <SelfContained>false</SelfContained>
         <DebugType>embedded</DebugType>
-        <Version>1.0.0</Version>
+        <MinVerTagPrefix>v</MinVerTagPrefix>
         <Description>Sample AssettoServer plugin — template showing custom HTTP routes, chat commands, YAML config and an autostart service.</Description>
         <PublishDir Condition="'$(RuntimeIdentifier)' == 'linux-x64'">..\out-linux-x64\plugins\$(MSBuildProjectName)\</PublishDir>
         <PublishDir Condition="'$(RuntimeIdentifier)' == 'linux-arm64'">..\out-linux-arm64\plugins\$(MSBuildProjectName)\</PublishDir>
@@ -41,6 +41,14 @@
             <Private>false</Private>
             <ExcludeAssets>runtime</ExcludeAssets>
         </ProjectReference>
+    </ItemGroup>
+
+    <!-- Tag-driven versions (git tag v1.2.3 -> package 1.2.3), same scheme as the host. -->
+    <ItemGroup>
+        <PackageReference Include="MinVer" Version="7.0.0">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+        </PackageReference>
     </ItemGroup>
 
 </Project>
