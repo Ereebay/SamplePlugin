@@ -4,8 +4,7 @@
 #         (PascalCase; a trailing "Plugin" suffix is optional and normalized)
 #
 # What it does:
-#   * renames SamplePlugin.csproj and the Sample*.cs classes
-#     (plus lang/ and lua/ on the localization branches, if present)
+#   * renames SamplePlugin.csproj, the Sample*.cs classes and the lang/lua files
 #   * rewrites namespaces, class names, lang-key prefixes, routes and docs
 #   * deletes itself — the result is your plugin, not a template
 #
@@ -30,8 +29,6 @@ $pluginLc = $plugin.ToLowerInvariant()
 $baseLc   = $base.ToLowerInvariant()
 
 # --- 1) rename files --------------------------------------------------------
-# lang/ and lua/ only exist on the localization branches (0.0.55custom);
-# on main / 0.0.54 those entries are absent and silently skipped.
 $renames = [ordered]@{
     'SamplePlugin.csproj'             = "$plugin.csproj"
     'Sample.cs'                       = "$base.cs"
@@ -47,6 +44,8 @@ $renames = [ordered]@{
 foreach ($k in $renames.Keys) {
     if (Test-Path -LiteralPath $k) {
         Move-Item -LiteralPath $k -Destination $renames[$k]
+    } else {
+        Write-Warning "expected '$k' not found - skipped"
     }
 }
 
