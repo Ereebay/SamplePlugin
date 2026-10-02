@@ -18,13 +18,12 @@ jobs:
           repository: compujuckel/AssettoServer
           ref: v0.0.54          # this template targets AssettoServer 0.0.54 (net8.0)
           path: AssettoServer
-          fetch-depth: 0        # MinVer derives the version from git tags
+          fetch-depth: 0        # Nerdbank.GitVersioning needs full history
 
       - name: Checkout plugin
         uses: actions/checkout@v4
         with:
           path: AssettoServer/sample-plugin
-          fetch-depth: 0        # MinVer derives the version from git tags
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
